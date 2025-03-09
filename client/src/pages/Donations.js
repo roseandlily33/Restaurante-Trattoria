@@ -1,15 +1,11 @@
-import { useEffect } from 'react';
-import { QUERY_CHECKOUT } from "../utils/queries";
-import { useLazyQuery } from '@apollo/client';
-import { loadStripe } from '@stripe/stripe-js';
-import { DonationsContainer, DonationsForm } from '../styled/Donations.styled';
+import { useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { DonationsContainer, DonationsForm } from "../styled/Donations.styled";
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const DonationPage = () => {
-
-  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-
+  let data;
   useEffect(() => {
     if (data) {
       stripePromise.then((res) => {
@@ -17,25 +13,23 @@ const DonationPage = () => {
       });
     }
   }, [data]);
-  
+
   const submitHandler = (event) => {
     event.preventDefault();
     alert("submitted!");
 
-    getCheckout({
-      variables: { 
-        fullName: "John",
-        amount: 100
-       },
-    });
-  }
+    // getCheckout({
+    //   variables: {
+    //     fullName: "John",
+    //     amount: 100
+    //    },
+    // });
+  };
 
-    
   return (
     <DonationsContainer>
       <h3>Donations Page</h3>
-      <DonationsForm  onSubmit={submitHandler}>
-
+      <DonationsForm onSubmit={submitHandler}>
         <div class="inputBox">
           <span>Full Name :</span>
           <input type="text" placeholder="Joe Murray"></input>
@@ -52,20 +46,20 @@ const DonationPage = () => {
           <span>City :</span>
           <input type="text" placeholder="City"></input>
         </div>
-          <div class="inputBox">
-            <span>State :</span>
-            <input type="text" placeholder="State"></input>
-          </div>
-          <div class="inputBox">
-            <span>Zip Code :</span>
-            <input type="text" placeholder="123 456"></input>
-          </div>
-          <div class="inputBox">
-            <span>Amount :</span>
-            <input type="number" placeholder="$100.00"></input>
-          </div>
+        <div class="inputBox">
+          <span>State :</span>
+          <input type="text" placeholder="State"></input>
+        </div>
+        <div class="inputBox">
+          <span>Zip Code :</span>
+          <input type="text" placeholder="123 456"></input>
+        </div>
+        <div class="inputBox">
+          <span>Amount :</span>
+          <input type="number" placeholder="$100.00"></input>
+        </div>
 
-      {/* <div class="col">
+        {/* <div class="col">
         <h3 class="title">payment</h3>
 
         <div class="inputBox">
@@ -91,10 +85,12 @@ const DonationPage = () => {
           </div>
         </div>
       </div> */}
-    <button type="submit" className='button'>Submit</button>
-    </DonationsForm>
-  </DonationsContainer>
+        <button type="submit" className="button">
+          Submit
+        </button>
+      </DonationsForm>
+    </DonationsContainer>
   );
-}
+};
 
 export default DonationPage;

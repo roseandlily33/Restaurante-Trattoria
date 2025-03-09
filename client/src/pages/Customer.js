@@ -1,5 +1,3 @@
-import { useQuery} from "@apollo/client";
-import { GET_USER} from "../utils/queries";
 import { useState } from "react";
 import {StyledCustomer, StyledCustomerRight, CustomerReview, CustomerButtonContainer } from "../styled/Customer.styled";
 import img4 from '../images/food/img4.jpg';
@@ -10,8 +8,7 @@ import CustomerReservations from "../components/CustomerReservation";
 
 
 const CustomerPage = () => {
-    const {loading, data} = useQuery(GET_USER);
-    const userData = data?.user || {};
+    const userData =  {};
 
     const [currentSection, setCurrentSection] = useState('Reviews');
     const section = () => {

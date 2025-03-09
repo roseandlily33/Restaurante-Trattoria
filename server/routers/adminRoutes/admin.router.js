@@ -1,6 +1,6 @@
-const adminRouter = require('express').Router();
-const {} = require('./admin.controller');
+// const adminRouter = require('express').Router();
+// const {} = require('./admin.controller');
 
-adminRouter.get('/', );
+// adminRouter.get('/', );
 
-module.exports = adminRouter;
+// module.exports = adminRouter;
